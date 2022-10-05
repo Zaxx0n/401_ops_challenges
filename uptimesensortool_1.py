@@ -12,21 +12,21 @@ import os
 # import sys
 
 # declares variables 
-
+hostname = input("Enter an IP address to check: ")
 timestamp = datetime.datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
 # result = []
 
 # declare functions
 def updog():
-    hostname = "8.8.8.8"
+    # hostname = "8.8.8.8"
     status = os.system("ping -c 1 " + hostname)  
     if status == 0:
-            print("host 8.8.8.8 is up", timestamp)
+            print("host", hostname, "is up!", timestamp)
             # result.append(timestamp)
             # print(result)
             # print("host 8.8.8.8 is up")
     else: 
-            print("host 8.8.8.8 is down", timestamp)
+            print("Host", hostname, "is down.", timestamp)
             
     
 # print(result)
