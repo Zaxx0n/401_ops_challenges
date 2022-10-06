@@ -9,11 +9,12 @@
 import time
 import datetime
 import os
-# import sys
+
 
 # declares variables 
 hostname = input("Enter an IP address to check: ")
 timestamp = datetime.datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
+
 # result = []
 
 # declare functions
@@ -27,8 +28,7 @@ def updog():
             # print("host 8.8.8.8 is up")
     else: 
             print("Host", hostname, "is down.", timestamp)
-            
-    
+               
 # print(result)
 
 while True:
