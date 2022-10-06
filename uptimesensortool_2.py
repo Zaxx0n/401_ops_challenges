@@ -14,7 +14,7 @@ from email.message import EmailMessage
 
 # declares variables
 email_sender = "recyclops1970@gmail.com" # email information
-email_password = input("Enter your password for", email_sender) # email information
+email_password = input("Enter your password:") # email information
 email_receiver = input("Please enter a valid email to recieve status results:") # email information
 
 hostname = input("Enter an IP address to monitor: ")
@@ -23,10 +23,9 @@ last_ping = None
 ping_status = None
 
 
-
 # email subject & body
-subject = 'Host Status Updated'
-body = "host", hostname, "is up!", timestamp
+# subject = 'Host Status Updated'
+# body = "host", hostname, "is up!", timestamp
 
 # email message
 # em = EmailMessage()
@@ -36,31 +35,39 @@ body = "host", hostname, "is up!", timestamp
 # em.set_content(body)
 # context = ssl.create_default_context()
 
-# sending the email
-sendmail = ()
-with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-    smtp.login(email_sender, email_password)
-    smtp.sendmail(email_sender, email_receiver)
 
 # declare functions
-def ping():
+def ping(hostname):
     ping_status = os.system("ping -c 1 " + hostname)
     if ping_status == 0:
         return True
     else :
         return False  
 
-def updog():
-      if ping_status != 0 & last_ping == "up":
-        sendmail
-      if ping_status != 0 & last_ping == "down":
-        sendmail
-      else: 
-        return 
+def getlastping():
+    if ping_status == True:
+        last_ping == True
+    else : last_ping == False
+
+def statuscheck():
+    if ping_status != True & last_ping == False:
+        sendmail()
+    if ping_status == False & last_ping == True:
+        sendmail()
+     
+
+# sending the email
+def sendmail():
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login(email_sender, email_password)
+        smtp.sendmail(email_sender, email_receiver)
                
 # main
 
 while True:
-    ping()
-    time.sleep(100)
+    ping(hostname)
+    print(ping_status)
+    # getlastping()
+    # statuscheck()
+    time.sleep(2)
 # end
