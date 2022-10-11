@@ -37,8 +37,8 @@ ping_status = None
 
 
 # declare functions
-def ping(hostname):
-    ping_status = os.system("ping -c 1 " + hostname)
+def ping(targetIP):
+    ping_status = os.system("ping -c 1 " + targetIP)
     if ping_status == 0:
         return True
     else :
@@ -46,8 +46,8 @@ def ping(hostname):
 
 def getlastping():
     if ping_status == True:
-        last_ping == True
-    else : last_ping == False
+        last_ping = "up"
+    else : last_ping = "down"
 
 def statuscheck():
     if ping_status != True & last_ping == False:
@@ -56,7 +56,7 @@ def statuscheck():
         sendmail()
      
 
-# sending the email
+# sending the emails
 def sendmail():
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(email_sender, email_password)
@@ -65,9 +65,8 @@ def sendmail():
 # main
 
 while True:
-    ping(hostname)
-    print(ping_status)
-    # getlastping()
-    # statuscheck()
+    ping_status = ping(hostname)
+    last_ping = getlastping()
+    statuscheck()
     time.sleep(2)
 # end
