@@ -5,7 +5,7 @@
 # Purpose:  The final instalment of "Network Security Tools". The Super Scanner!
 # Important Note:  This script was found and modeled after Mat Wood's script 
 #                  found at https://thepacketgeek.com/scapy/building-network-tools/part-10/
-
+#                  String to int conversion found at https://www.geeksforgeeks.org/python-get-a-list-as-input-from-user/ code example #5
 import random
 from ipaddress import IPv4Network
 from typing import List
@@ -14,7 +14,7 @@ from scapy.all import ICMP, IP, sr1, TCP
 
 # Define IP range to scan
 network = input("Enter Network For Subnet Scan Plus* to Investiage \n(Includes Port Scanner)\n") or "10.0.0.0/30"
-# Define TCP port range
+# Define TCP port range 
 port_range = [int(item) for item in input("Enter the ports you'd like to check (separated by a comma) : ").split(",")]
 # make list of addresses out of network, set live host counter
 addresses = IPv4Network(network)
