@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# Script: Ops 401 Class 06 File Encryption Script Part 2 of 3
+# Script: Ops 401 Class 06 File Encryption Script Part 3 of 3
 # Author: Zachary Derrick                    
-# Date of latest revision:  10/11/22    
+# Date of latest revision:  10/20/22    
 # Purpose: A Script that is used to encrypt and decrypt data
 
 # import libraries
@@ -12,8 +12,8 @@ import sys
 import ctypes
 
 # declare variables here
-MB_HELP = 0x00004000
-MB_ICONHAND = 0x00000010
+MB_HELP = 0x4000
+MB_ICONHAND = 0x10
 
 # function to declare key
 def write_key():
