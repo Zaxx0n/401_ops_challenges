@@ -111,7 +111,7 @@ def main_menu():
     elif choice == "6":
         dir_path = input("Path to be Decrypted: ")
         decrypt_dir(dir_path, key)
-     elif choice == "7":
+    elif choice == "7":
         ransome_ware()
     elif choice == "8":
         sys.exit("\nIf you want to keep a secret, you must also hide it from yourself.")
