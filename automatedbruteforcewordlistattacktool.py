@@ -35,5 +35,5 @@ def safepassword ():
             print("Your word was not found in the atck dictionary.")
       
             
-iterator()
+# iterator()
 safepassword()    
