@@ -131,16 +131,7 @@ while True:
     main_menu()
 
 
-
- 
-
-   
-
-
-
-
-
-
+# Below is code that might be useful later. 
 # try:
 #     session.login(host, username, passwrd)
 #     session.sendline("uptime")
