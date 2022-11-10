@@ -171,20 +171,16 @@ while choice != 0:
     elif choice == "0":
         sys.exit("\nNaughty, Naughty, Naughty... You Sneaky ol'Ha☠or!")
     else:
-        print("\nThat is not an option.")
-    # else:
-    #     try:
-    #         error = int(input("Please enter a valid option: "))
-    #         main_menu()
-    #     except ValueError:
-    #         print(f"Learn to read. '{choice}' was not an option.") 
+        print("\n( ◣∀◢)ψ.")
+    try:
+            error = int(input(f"Learn to read. '{choice}' was not an option.\nPlease enter a valid option: "))
+            break
+    except ValueError:
+            print(f"Learn to read. '{choice}' was not an option.") 
 
-           
-    # else:
-    #     print("\nThat is not an option.")
     print()
     main_menu()
     choice = ("\nWhat's it going to be then, eh?: ")
 
 print()
-# logging.info('Session Ended')
+logging.info('Session Ended')
