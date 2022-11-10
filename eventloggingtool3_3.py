@@ -9,10 +9,9 @@ import time, getpass, paramiko, sys, os, socket, zipfile, logging
 from tqdm import tqdm
 from logging.handlers import TimedRotatingFileHandler
 
-# line break
+# global varialbes
+log_filename='bruteflog.log'
 line = "\n-------------------------------------------------------------( ◣∀◢)ψ------------------\n"
-
-log_filename = "rot_log.log"
 
 # define functions
 def iterator():
@@ -120,8 +119,29 @@ def zip_file_crack():
                 return
     print("[!] Password not found, try other wordlist.")
 
+def basiclog():
+    logging.basicConfig(log_filename, level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+    logging.info('New Session.')
+    logging.info('Finished')
+
+
+def rotating_log_size(log_filename):
+    """
+    Creates a rotating log
+    """
+    logger = logging.getLogger("Rotating Log")
+    logger.setLevel(logging.INFO)
+
+    # add a rotating timed handler with an interval of once every minute with a total of 5 backups
+    handler = TimedRotatingFileHandler(path, maxBytes=20, backupCount=5)
+    logger.addHandler(handler)
+
+    for i in range(10):
+        logger.info("This is log line %s" % i)
+        time.sleep(1.5)
+
 # here is the start of my rotating timed log
-def rotating_timed_log(log_filename):
+def rotating_log_timed(log_filename):
     """
     Creates a rotating log
     """
@@ -142,7 +162,7 @@ def multihandlelogger():
 
     # Create handlers
     c_handler = logging.StreamHandler()
-    f_handler = logging.FileHandler('file.log')
+    f_handler = logging.FileHandler(log_filename)
     c_handler.setLevel(logging.WARNING)
     f_handler.setLevel(logging.ERROR)
 
@@ -159,6 +179,13 @@ def multihandlelogger():
     logger2.warning('Warning! Warning!')
     logger2.error('Oopsie! An error has occured.')
 
+def logmenu():
+    print("[1] Just the Basics.")
+    print("[2] Rotating: File Size")
+    print("[3] Rotating: Timed")
+    print("[0] Continue to Pa$$w0rd ☠️H҉A҉C҉K҉E҉R҉☠️")
+
+
 def main_menu():
     print("\n⛧::::::::::Pa$$w0rd ☠️H҉A҉C҉K҉E҉R҉☠️::( ◣∀◢)ψ::::::::::⛧")
     print("Choose 1 to Check Password Strength")
@@ -166,14 +193,27 @@ def main_menu():
     print("Choose 3 to Crack a ZIP File")
     print("Choose 0 to Quit Program")
     
-# main code 
+# main code
+if __name__ == '__main__': 
+    logmenu()
+logoption = int(input("Which type of logs would you like to keep?"))
 
-if __name__ == "__main__":
-    log_file = "loggers.log"
-    rotating_timed_log(log_file)
+while logoption != 0:
+    if logoption == 1:
+        basiclog()
+        break      
+    elif logoption == 2:
+        rotating_log_size()
+        break
+    elif logoption == 3:
+        rotating_log_timed()
+        break
+    else:
+        print("Invalid Option")
 
-logging.basicConfig(filename='BFAlog.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-logging.info('New Session')
+    print()
+    logmenu()
+    logoption = int(input("Which type of logs would you like to keep?"))
 
 main_menu()
 choice = input("\nWhat's it going to be then, eh?: ")
