@@ -182,7 +182,7 @@ def logmenu():
     print("[2] Rotating: File Size")
     print("[3] Rotating: Timed")
     print("[4] Multii-Handler")
-    print("[0] Continue to Pa$$w0rd ☠️H҉A҉C҉K҉E҉R҉☠️")
+    print("[0] None: Continue to Pa$$w0rd ☠️H҉A҉C҉K҉E҉R҉☠️")
 
 
 def main_menu():
