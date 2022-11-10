@@ -7,13 +7,14 @@
 # Import Libraries
 import time, getpass, paramiko, sys, os, socket, zipfile, logging
 from tqdm import tqdm
-from logging.handlers import TimedRotatingFileHandler
+from logging.handlers import TimedRotatingFileHandler, RotatingFileHandler
 
 # global varialbes
-log_filename='bruteflog.log'
+log_filename = 'bruteflog.log'
 line = "\n-------------------------------------------------------------( ◣∀◢)ψ------------------\n"
 
 # define functions
+# brute force functions
 def iterator():
     filepath = input("Please enter the filepath to your password dictionary:\n")  or "/home/zaxxon/rockyou.txt"
     file = open(filepath)
@@ -99,15 +100,10 @@ def ssh_connect(password, code = 0):
 
 def zip_file_crack():
     wordlist = dictpath()
-
     zip_file = input("Please enter the filepath to the zip file you're trying to crack:\n") or "/home/zaxxon/useless_zip.zip"
- 
     zip_file = zipfile.ZipFile(zip_file)
-
     number_of_words_in_word_dictionary = len(list(open(wordlist, "rb")))
- 
     print("Total passwords to test:", number_of_words_in_word_dictionary)
-    
     with open(wordlist, "rb") as wordlist:
         for word in tqdm(wordlist, total=number_of_words_in_word_dictionary, unit="word"):
             try:
@@ -119,9 +115,11 @@ def zip_file_crack():
                 return
     print("[!] Password not found, try other wordlist.")
 
+# logging functions
 def basiclog():
-    logging.basicConfig(log_filename, level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+    logging.basicConfig(filename = "bruteflog.log", level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
     logging.info('New Session.')
+    main_menu()
     logging.info('Finished')
 
 
@@ -133,12 +131,12 @@ def rotating_log_size(log_filename):
     logger.setLevel(logging.INFO)
 
     # add a rotating timed handler with an interval of once every minute with a total of 5 backups
-    handler = TimedRotatingFileHandler(path, maxBytes=20, backupCount=5)
+    handler = RotatingFileHandler(log_filename, maxBytes=20, backupCount=5)
     logger.addHandler(handler)
 
     for i in range(10):
         logger.info("This is log line %s" % i)
-        time.sleep(1.5)
+        time.sleep(.5)
 
 # here is the start of my rotating timed log
 def rotating_log_timed(log_filename):
@@ -153,12 +151,12 @@ def rotating_log_timed(log_filename):
     logger.addHandler(handler)
 
     for i in range(6):
-        logger.info("This is test")
+        logger.info("This is test of timed logs")
         time.sleep(75)
 
 def multihandlelogger():
     # Create a custom logger
-    logger2 = logging.getLogger(__name__)
+    logger = logging.getLogger(__name__)
 
     # Create handlers
     c_handler = logging.StreamHandler()
@@ -173,16 +171,17 @@ def multihandlelogger():
     f_handler.setFormatter(f_format)
 
     # Add handlers to the logger
-    logger2.addHandler(c_handler)
-    logger2.addHandler(f_handler)
+    logger.addHandler(c_handler)
+    logger.addHandler(f_handler)
 
-    logger2.warning('Warning! Warning!')
-    logger2.error('Oopsie! An error has occured.')
+    logger.warning('Warning! Warning!')
+    logger.error('Oopsie! An error has occured.')
 
 def logmenu():
-    print("[1] Just the Basics.")
+    print("[1] Just the Basic")
     print("[2] Rotating: File Size")
     print("[3] Rotating: Timed")
+    print("[4] Multii-Handler")
     print("[0] Continue to Pa$$w0rd ☠️H҉A҉C҉K҉E҉R҉☠️")
 
 
@@ -196,24 +195,29 @@ def main_menu():
 # main code
 if __name__ == '__main__': 
     logmenu()
-logoption = int(input("Which type of logs would you like to keep?"))
+logoption = int(input("\nWhich type of logs would you like to keep? "))
 
 while logoption != 0:
     if logoption == 1:
         basiclog()
         break      
     elif logoption == 2:
-        rotating_log_size()
+        log_filename = "bruteflog.log"
+        rotating_log_size(log_filename)
         break
     elif logoption == 3:
-        rotating_log_timed()
+        log_filename = "bruteflog.log"
+        rotating_log_size(log_filename)
+        break
+    elif logoption == 4:
+        multihandlelogger()
         break
     else:
-        print("Invalid Option")
+        print("\nInvalid Option")
 
     print()
     logmenu()
-    logoption = int(input("Which type of logs would you like to keep?"))
+    logoption = int(input("\nWhich type of logs would you like to keep? "))
 
 main_menu()
 choice = input("\nWhat's it going to be then, eh?: ")
