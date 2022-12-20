@@ -67,13 +67,13 @@ if response == '1':
     netcat(destination, portnumber)
    
      
-# # If user's input is 1, perform a banner grabbing using Nmap
+# # If user's input is 2, perform a banner grabbing using Nmap
 elif response == '2':
     print("Nmap Results: ")
     nmap(destination, portnumber)
     
      
-# If user's input is 1, perform a banner grabbing using Telnet
+# If user's input is 3, perform a banner grabbing using Telnet
 elif response == '3':
     print("Telnet Results: ")
     telnet(destination, portnumber)
